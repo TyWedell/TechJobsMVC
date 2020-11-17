@@ -24,17 +24,21 @@ namespace TechJobsMVC.Controllers
         [HttpPost]
         public IActionResult Results(string searchType, string searchTerm)
         {
+          
             List<Job> jobs;
-            if (searchTerm == "")
+            if (String.IsNullOrEmpty(searchTerm))
             {
                 jobs = JobData.FindAll();
             }
             else
             {
-                jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+                
+                jobs = JobData.FindByColumnAndValue(searchType, searchTerm.ToLower());
             }
             ViewBag.jobs = jobs;
-            return Redirect("/search");
+            ViewBag.columns = ListController.ColumnChoices;
+
+            return View("Index");
         }
     }
 }

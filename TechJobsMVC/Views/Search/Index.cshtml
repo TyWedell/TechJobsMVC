@@ -4,12 +4,13 @@
 
     <form action="/search/results" method="post">
         <h2>Search by:</h2>
-
+        
         <p>
             @foreach (var column in ViewBag.columns)
             {
+                
                 <span>
-                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@column.Key == 'all'" />
+                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@column.Key = 'all'"/>
                     <label for="@column.Key">@column.Value</label>
                 </span>
             }
@@ -26,7 +27,7 @@
 
     <hr />
 
-    @*@if (ViewBag.jobs.count > 0)
+    @if (ViewBag.jobs != null )
     {
         @foreach (Job job in ViewBag.jobs)
         {
@@ -51,6 +52,6 @@
                 </tr>
             </table>
         }
-    }*@
+    }
 
 </div>
