@@ -5,25 +5,58 @@
     
     @foreach(Job job in ViewBag.jobs)
     {
-       <table class="job-listing">
-           <tr>
-           <td>ID: @job.Id</td>
-           </tr>
-           <tr>
-           <td>Name: @job.Name</td>
-           </tr>
-           <tr><td>Employer: @job.Employer</td>
-           </tr>
-           <tr>
-           <td>Location: @job.Location</td>
-           </tr>
-           <tr>
-           <td>Position Type: @job.PositionType</td>
-           </tr>
-           <tr>
-           <td>Skill: @job.CoreCompetency</td>
-           </tr>
-       </table>
+<table class="job-listing">
+    <tr>
+        <td>ID: @job.Id</td>
+    </tr>
+    <tr>
+        <td>Name: @job.Name</td>
+    </tr>
+    <tr>
+        @{
+            var employer =
+                new Dictionary<string, string>
+                {
+                           {"column", "employer" },
+                           {"value", job.Employer.ToString()}
+                            };
+        }
+        <td>Employer: <a asp-all-route-data="employer">@job.Employer</a></td>
+    </tr>
+    @{
+        var location =
+            new Dictionary<string, string>
+            {
+                           {"column", "location" },
+                           {"value", job.Location.ToString() }
+                                    };
+    }
+    <tr>
+        <td>Location: <a asp-all-route-data="location">@job.Location</a></td>
+    </tr>
+    @{
+        var position =
+            new Dictionary<string, string>
+            {
+                           {"column", "positionType" },
+                           {"value", job.PositionType.ToString() }
+                            };
+    }
+    <tr>
+        <td>Position Type: <a asp-all-route-data="position">@job.PositionType</a></td>
+    </tr>
+    @{
+        var skill =
+            new Dictionary<string, string>
+            {
+                           {"column", "coreCompetency" },
+                           {"value", job.CoreCompetency.ToString() }
+                    };
+    }
+    <tr>
+        <td>Skill: <a asp-all-route-data="skill">@job.CoreCompetency</a></td>
+    </tr>
+</table>
     }
     
 </div>
